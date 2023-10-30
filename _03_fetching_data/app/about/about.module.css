@@ -1,0 +1,8 @@
+.main {
+  min-height: 100vh;
+  /* display: grid;
+  place-content: center; */
+  background-color: #acacac;
+  /* border: 1px solid red; */
+  /* padding: 20px; */
+}
