@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import getAllUsers from "../lib/getAllUsers";
+import { getAllUsers } from "../lib";
 
 export const metadata: Metadata = {
   title: "Users Page",
