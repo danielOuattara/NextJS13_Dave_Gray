@@ -1,14 +1,39 @@
+import { limiter } from "../config/limiter";
+import { NextResponse } from "next/server";
+
 const DATA_SOURCE_URL = "https://jsonplaceholder.typicode.com/todos";
 
-export async function GET() {
-  const secret = process.env.DATA_API_KEY;
-  console.log("secret = ", secret);
+export async function GET(request: Request) {
+  const origin = request.headers.get("origin");
+  console.log("origin = ", origin);
+
+  const remaining = await limiter.removeTokens(1);
+  console.log("remaining = ", remaining);
+
+  if (remaining < 0) {
+    return new NextResponse(null, {
+      status: 429,
+      statusText: "Too many request, Try again latter",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/plain",
+      },
+    });
+  }
+
+  // const secret = process.env.DATA_API_KEY;
+  // console.log("secret = ", secret);
 
   const response = await fetch(DATA_SOURCE_URL);
   const todos: Todo[] = await response.json();
   console.log("todos = ", todos);
 
-  return Response.json({ todos });
+  return new NextResponse(JSON.stringify(todos), {
+    headers: {
+      "Access-Control-Allow-Origin": origin || "*",
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 //--------------------------------------------------------------------------
