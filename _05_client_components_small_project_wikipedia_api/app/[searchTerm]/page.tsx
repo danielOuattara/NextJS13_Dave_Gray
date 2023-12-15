@@ -8,6 +8,25 @@ type Props = {
 };
 
 //-------------------------------------------------------------------------
+// export async function generateMetadata(props: Props) {
+//   const wikiData: Promise<SearchResult> = getWikiResults(
+//     props.params.searchTerm,
+//   );
+//   const data = await wikiData;
+//   const displayTerm = props.params.searchTerm.replaceAll("%20", " ");
+
+//   if (!data?.query?.pages) {
+//     return {
+//       title: `${displayTerm} Not Found`,
+//     };
+//   }
+
+//   return {
+//     title: displayTerm,
+//     description: `Search results for ${displayTerm}`,
+//   };
+// }
+//-------------------------------------------------------------------------
 export async function generateMetadata({ params: { searchTerm } }: Props) {
   const wikiData: Promise<SearchResult> = getWikiResults(searchTerm);
   const data = await wikiData;
