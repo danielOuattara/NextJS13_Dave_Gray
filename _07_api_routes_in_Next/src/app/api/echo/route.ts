@@ -1,9 +1,7 @@
 //
-//
-
 export async function GET(request: Request) {
   console.log("--------------------------------------");
-  console.log("request = ", request);
+  // console.log("request = ", request);
 
   console.log("--------------------------------------");
   console.log("new URL(request.url) = ", new URL(request.url));

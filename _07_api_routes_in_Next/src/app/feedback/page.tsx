@@ -50,7 +50,7 @@ export default function Feedback() {
 
   const canSave = [...Object.values(data)].every(Boolean);
 
-  const content = (
+  return (
     <form
       onSubmit={handleSubmit}
       className="flex flex-col mx-auto max-w-3xl p-6"
@@ -66,7 +66,7 @@ export default function Feedback() {
         id="name"
         name="name"
         placeholder="Jane"
-        pattern="([A-Z])[\w+.]{1,}"
+        // pattern="([A-Z])[\w+.]{1,}"
         value={data.name}
         onChange={handleChange}
         autoFocus
@@ -108,6 +108,4 @@ export default function Feedback() {
       </button>
     </form>
   );
-
-  return content;
 }
