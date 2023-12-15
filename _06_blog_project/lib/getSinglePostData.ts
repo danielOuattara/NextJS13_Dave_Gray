@@ -7,8 +7,9 @@ import html from "remark-html";
 const postsDirectory = path.join(process.cwd(), "blogposts");
 
 export async function getSinglePostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileFullPath = path.join(postsDirectory, `${id}.md`);
+
+  const fileContents = fs.readFileSync(fileFullPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);

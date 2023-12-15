@@ -4,17 +4,18 @@ import matter from "gray-matter";
 
 const postsDirectory = path.join(process.cwd(), "blogposts");
 
-export function getSortedAllPostsData() {
+export function getSortedAllPostsFrontMatter() {
   // Get file name under /posts
 
   const fileNames = fs.readdirSync(postsDirectory);
+
   const allPostsData = fileNames.map((fileName) => {
-    // Remove .md from file name to get id
+    // Remove .md from file name to get id/slug
     const id = fileName.replace(/\.md$/, "");
 
     // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileFullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fileFullPath, "utf8");
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);

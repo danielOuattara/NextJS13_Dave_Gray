@@ -1,7 +1,7 @@
 import {
   getFormattedDate,
   getSinglePostData,
-  getSortedAllPostsData,
+  getSortedAllPostsFrontMatter,
 } from "@/lib";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -14,8 +14,9 @@ type Props = {
 };
 
 //--------------------------------------------------------------
+// this function SSR to SSG for all request for each blog
 export function generateStaticParams() {
-  const posts = getSortedAllPostsData();
+  const posts = getSortedAllPostsFrontMatter();
   return posts.map((post) => ({
     postId: post.id,
   }));
@@ -23,7 +24,7 @@ export function generateStaticParams() {
 
 //--------------------------------------------------------------
 export function generateMetadata({ params }: Props) {
-  const posts = getSortedAllPostsData();
+  const posts = getSortedAllPostsFrontMatter();
   const post = posts.find((post) => post.id === params.postId);
 
   if (!post) {
@@ -40,13 +41,14 @@ export function generateMetadata({ params }: Props) {
 
 //--------------------------------------------------------------
 export default async function Post({ params }: Props) {
-  const posts = getSortedAllPostsData();
+  // check post exist !
+  const posts = getSortedAllPostsFrontMatter();
   const post = posts.find((post) => post.id === params.postId);
-
   if (!post) {
     return notFound();
   }
 
+  // get post data & render it
   const postData = await getSinglePostData(params.postId);
 
   return (
