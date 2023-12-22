@@ -28,6 +28,8 @@ export async function GET(request: Request) {
   const todos: Todo[] = await response.json();
   console.log("todos = ", todos);
 
+  // return NextResponse.json(todos); // OLD: before using CORS
+
   return new NextResponse(JSON.stringify(todos), {
     headers: {
       "Access-Control-Allow-Origin": origin || "*",

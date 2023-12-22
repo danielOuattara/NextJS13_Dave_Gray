@@ -14,18 +14,17 @@ const DATA_SOURCE_URL = "https://jsonplaceholder.typicode.com/todos";
 // }
 
 //------------------------------------------------------------------- # 2
-
 type Props = {
   params: {
-    id: string;
+    todoId: string;
   };
 };
 
-export async function GET(request: Request, { params: { id } }: Props) {
-  const response = await fetch(`${DATA_SOURCE_URL}/${id}`);
+export async function GET(request: Request, { params: { todoId } }: Props) {
+  const response = await fetch(`${DATA_SOURCE_URL}/${todoId}`);
   const todo: Todo = await response.json();
-  if (!todo) {
-    return Response.json({ message: `Not to found with id : ${id}` });
+  if (!todo.userId) {
+    return Response.json({ message: `Not to found with todoId : ${todoId}` });
   }
 
   return Response.json(todo);

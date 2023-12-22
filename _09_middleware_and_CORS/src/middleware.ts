@@ -19,11 +19,13 @@ export function middleware(request: Request) {
     });
   }
 
+  // matcher request URL : version 2
   if (request.url.includes("/api/")) {
     // do something OR/AND use const config = {} below
     console.log("conditional middleware call 1 OK");
   }
 
+  // matcher request URL : version 3
   const regex = new RegExp("/api/*");
   if (regex.test(request.url)) {
     console.log("conditional middleware call 2 OK");
@@ -39,7 +41,8 @@ export function middleware(request: Request) {
 
   return NextResponse.next();
 }
-
+//
+//
 // applying our middleware matcher
 export const config = {
   matcher: "/api/:path*",
