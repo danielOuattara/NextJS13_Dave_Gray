@@ -12,30 +12,13 @@ export async function GET() {
 }
 
 //--------------------------------------------------------------------------
-// export async function DELETE(request: Request) {
-//   const { id }: Partial<Todo> = await request.json();
-//   if (!id) {
-//     return Response.json({ message: "Id is required from the body request" });
-//   }
+/* id in request body
+---------------------- */
 
-//   await fetch(`${DATA_SOURCE_URL}/${id}`, {
-//     method: "DELETE",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "API-Key": process.env.DATA_API_KEY as string,
-//     },
-//   });
-
-//   return Response.json({ message: `Todo ${id} is deleted` });
-// }
-
-//---------------
 export async function DELETE(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
+  const { id }: Partial<Todo> = await request.json();
   if (!id) {
-    return Response.json({ message: "Id is required from the url" });
+    return Response.json({ message: "Id is required from the body request" });
   }
 
   await fetch(`${DATA_SOURCE_URL}/${id}`, {
@@ -48,6 +31,28 @@ export async function DELETE(request: Request) {
 
   return Response.json({ message: `Todo ${id} is deleted` });
 }
+
+//---------------
+/* id in URL
+-------------- */
+// export async function DELETE(request: Request) {
+//   const { searchParams } = new URL(request.url);
+//   const id = searchParams.get("id");
+
+//   if (!id) {
+//     return Response.json({ message: "Id is required from the url" });
+//   }
+
+//   await fetch(`${DATA_SOURCE_URL}/${id}`, {
+//     method: "DELETE",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "API-Key": process.env.DATA_API_KEY as string,
+//     },
+//   });
+
+//   return Response.json({ message: `Todo ${id} is deleted` });
+// }
 
 //--------------------------------------------------------------------------
 export async function POST(request: Request) {

@@ -5,5 +5,5 @@ export async function GET(request: Request, response: Response) {
   const posts = await postsResponse.json();
   console.log("posts =", posts);
 
-  return new Response("Hello Next.js !");
+  return new Response("Successfully fetched posts!");
 }
