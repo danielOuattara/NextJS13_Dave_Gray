@@ -1,8 +1,8 @@
-import { getSortedAllPostsData } from "@/lib/";
+import { getSortedAllPostsFrontMatter } from "@/lib/";
 import ListItem from "./ListItem";
 
 export default function Posts() {
-  const posts = getSortedAllPostsData();
+  const posts = getSortedAllPostsFrontMatter();
 
   return (
     <section className="mt-6 mx-auto max-w-2xl">
