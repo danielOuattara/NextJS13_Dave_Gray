@@ -65,8 +65,8 @@ export async function POST(request: Request) {
     headers: {
       "Content-Type": "application/json",
       "API-Key": process.env.DATA_API_KEY as string,
-      body: JSON.stringify({ userId, title, completed: false }),
     },
+    body: JSON.stringify({ userId, title, completed: false }),
   });
   const newTodo: Todo = await response.json();
   return Response.json(newTodo);
@@ -83,8 +83,8 @@ export async function PUT(request: Request) {
     headers: {
       "Content-Type": "application/json",
       "API-Key": process.env.DATA_API_KEY as string,
-      body: JSON.stringify({ userId, title, completed }),
     },
+    body: JSON.stringify({ userId, title, completed }),
   });
   const updatedTodo: Todo = await response.json();
   return Response.json(updatedTodo);
@@ -106,8 +106,8 @@ export async function PATCH(request: Request) {
     headers: {
       "Content-Type": "application/json",
       "API-Key": process.env.DATA_API_KEY as string,
-      body: JSON.stringify(todo),
     },
+    body: JSON.stringify(todo),
   });
   const updatedTodo: Todo = await response.json();
   return Response.json(updatedTodo);
